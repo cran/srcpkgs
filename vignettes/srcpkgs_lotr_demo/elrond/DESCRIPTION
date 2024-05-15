@@ -1,0 +1,9 @@
+Package: elrond
+Title: elrond dummy package for scrpkgs
+Description: elrond dummy package for scrpkgs.
+Version: 0.1
+Authors@R: person("Karl", "Forner", , "karl.forner@gmail.com", role = c("aut", "cre"))
+License: MIT
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1

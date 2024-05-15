@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Getting started</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Getting started</h1>
+
+
+
+<div id="use-the-lotr-dummy-collection-of-source-packages" class="section level1">
+<h1>use the LOTR dummy collection of source packages</h1>
+<p>To illustrate the use of the <code>srcpkgs</code>, we need some source packages. An easy way to experiment with <code>srcpkgs</code> is with the <a href="https://github.com/kforner/srcpkgs_lotr_demo" class="uri">https://github.com/kforner/srcpkgs_lotr_demo</a> repository:</p>
+<ul>
+<li>install the <code>srcpkgs</code> package (cf <a href="https://kforner.github.io/srcpkgs/#installation" class="uri">https://kforner.github.io/srcpkgs/#installation</a>)</li>
+<li>check out the <a href="https://github.com/kforner/srcpkgs_lotr_demo" class="uri">https://github.com/kforner/srcpkgs_lotr_demo</a> repository:</li>
+</ul>
+<pre><code>git clone https://github.com/kforner/srcpkgs_lotr_demo.git
+cd srcpkgs_lotr_demo</code></pre>
+<p>then start a R session in that folder (type <code>R</code>):</p>
+<pre><code># load srcpkgs
+&gt;library(srcpkgs)</code></pre>
+</div>
+<div id="get_srcpkgs" class="section level1">
+<h1>get_srcpkgs()</h1>
+<p>The <code>get_srcpkgs()</code> fetches the list of source packages that are currently managed by <code>srcpkgs</code>. You should see all packages from the <code>srcpkgs_lotr_demo</code> repository.</p>
+<pre><code># let&#39;s see what source packages are discovered:
+&gt; get_srcpkgs()
+            package version                                                path                     imports depends suggests
+aragorn     aragorn     0.1   /workspaces/srcpkgs_pkg/srcpkgs_lotr_demo/aragorn                                             
+bilbo         bilbo     0.1     /workspaces/srcpkgs_pkg/srcpkgs_lotr_demo/bilbo                                             
+elrond       elrond     0.1    /workspaces/srcpkgs_pkg/srcpkgs_lotr_demo/elrond                                             
+elves         elves     0.1     /workspaces/srcpkgs_pkg/srcpkgs_lotr_demo/elves         galadriel,\nlegolas                 
+frodo         frodo     0.1     /workspaces/srcpkgs_pkg/srcpkgs_lotr_demo/frodo                                             
+galadriel galadriel     0.1 /workspaces/srcpkgs_pkg/srcpkgs_lotr_demo/galadriel                                             
+gandalf     gandalf     0.1   /workspaces/srcpkgs_pkg/srcpkgs_lotr_demo/gandalf                                             
+gimli         gimli     0.1     /workspaces/srcpkgs_pkg/srcpkgs_lotr_demo/gimli                                             
+hobbits     hobbits     0.1   /workspaces/srcpkgs_pkg/srcpkgs_lotr_demo/hobbits                       frodo   bilbo         
+legolas     legolas     0.1   /workspaces/srcpkgs_pkg/srcpkgs_lotr_demo/legolas                                             
+lotr           lotr     0.1      /workspaces/srcpkgs_pkg/srcpkgs_lotr_demo/lotr elves,gimli,aragorn,gandalf hobbits  </code></pre>
+<p>This function returns a <code>srcpkgs</code> object, that is a named list of <code>srcpkg</code> objects. You can <code>print</code> that object, or transform it in a data frame using <code>as.data.frame()</code>.</p>
+<pre><code>pkgs &lt;- get_srcpkgs()
+print(pkgs)
+
+df &lt;- as.data.frame(pkgs)</code></pre>
+</div>
+<div id="loading-and-reloading-packages" class="section level1">
+<h1>loading and reloading packages</h1>
+<div id="hacked-r-loaders" class="section level2">
+<h2>hacked R loaders</h2>
+<p>Since by default, the R loaders should be automatically <em>hacked</em> by <code>srcpkgs</code> (cf <code>hack_r_loaders()</code>), you may simply load and/or ttach these packages using <code>library()</code>, <code>loadNamespace()</code>, <code>getNamespace</code>, <code>::</code> and so on:</p>
+<pre><code>library(elves)
+loadNamespace(&#39;bilbo&#39;)
+frodo::frodo()</code></pre>
+<p>The rationale for hacking the R loaders is not just for convenience. It’s also for writing R code that will still work once the source packages are installed.</p>
+</div>
+<div id="using-pkg_load" class="section level2">
+<h2>using pkg_load()</h2>
+<p>The <code>pkg_load()</code> is the workhorse function to load packages. A major difference with <code>devtools::load_all()</code> defaults is that it does not source the <em>test helpers</em>, nor does it export all objects (cf <code>export_all</code>). The rationale is to stick as much as possible to the standard R loaders behaviour.</p>
+<p>You may use a package name, path, package or <code>srcpkgs</code> object to designate the package to load:</p>
+<pre><code>pkg_load(&#39;lotr&#39;)
+pkg_load(&#39;/workspaces/srcpkgs_pkg/srcpkgs_lotr_demo/lotr&#39;)
+pkg_load(pkgs$lotr)</code></pre>
+<div id="updating" class="section level3">
+<h3>updating</h3>
+<p>When you execute <code>pkg_load()</code> on a package already loaded, it will check for changes not only in that package but also in all its dependencies (among the source packages), and will do what’s needed to roxygenize, unload, reload until your package is up-to-date inside your R session.</p>
+</div>
+</div>
+</div>
+<div id="reset-and-settings" class="section level1">
+<h1>reset and settings</h1>
+<p>At <code>srcpkgs</code> startup time, i.e. when the <code>library(srcpkgs)</code> statement is executed, the R loaders are automatically hacked (cf <code>hack_r_loaders()</code>) UNLESS the hack is inhibited using the option <code>srcpkgs.inhibit_r_loaders_hack</code> or the environment variable <code>SRCPKGS.INHIBIT_R_LOADERS_HACK</code>.</p>
+<p>Then the fist time <code>get_srcpkgs()</code> will be executed (for example indirectly by calling <code>pkg_load()</code>), <code>srcpkgs</code> will figure out the <strong>project root</strong>, and from this root will search for source packages, using a heuristic. Since that can take a bit of I/O time, the project root and the paths of found source packages are cached.</p>
+<p>You may check those using the <code>settings()</code> function, and can change them using the <code>reset()</code> function.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
