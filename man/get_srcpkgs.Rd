@@ -4,7 +4,10 @@
 \alias{get_srcpkgs}
 \title{get the current source packages list}
 \usage{
-get_srcpkgs()
+get_srcpkgs(filter = NULL)
+}
+\arguments{
+\item{filter}{a pattern to filter the source packages}
 }
 \value{
 the source packages as a "scrpkgs" object, cf \code{\link[=find_srcpkgs]{find_srcpkgs()}}, or NULL if none
@@ -25,6 +28,9 @@ This function is useful for troubleshooting, to understand what are the source p
 and managed by \code{srcpkgs}
 }
 \examples{
-pkgs <- get_srcpkgs()
-print(pkgs)
+# setup a srcpkg. We need reset because it is not discoverable from the current directory
+pkg <- setup_and_get_dummy_srcpkg()
+reset(dirname(pkg$path))
+
+print(get_srcpkgs())
 }

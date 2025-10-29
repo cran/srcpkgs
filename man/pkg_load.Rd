@@ -18,7 +18,7 @@ pkg_load(
 )
 }
 \arguments{
-\item{pkgid}{a package name, path or object}
+\item{pkgid}{a package name, path or package object}
 
 \item{src_pkgs}{a collection of source packages as a \code{srckgs} object.}
 
@@ -47,14 +47,12 @@ in the NAMESPACE file.}
   Arguments passed on to \code{\link[devtools:load_all]{devtools::load_all}}
   \describe{
     \item{\code{path}}{Path to a package, or within a package.}
-    \item{\code{reset}}{clear package environment and reset file cache before loading
-any pieces of the package. This largely equivalent to running
-\code{\link[pkgload:unload]{unload()}}, however the old namespaces are not completely removed and no
-\code{.onUnload()} hooks are called. Use \code{reset = FALSE} may be faster for
-large code bases, but is a significantly less accurate approximation.}
+    \item{\code{reset}}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This is no longer supported
+because preserving the namespace requires unlocking its environment, which
+is no longer possible in recent versions of R.}
     \item{\code{recompile}}{DEPRECATED. force a recompile of DLL from source code, if
 present. This is equivalent to running \code{\link[pkgbuild:clean_dll]{pkgbuild::clean_dll()}} before
-\code{load_all}}
+\code{load_all()}}
   }}
 }
 \value{
@@ -77,17 +75,16 @@ must be loaded in proper order.
 i.e. if A-->B-->C, the load order must be C, B, A
 }
 \examples{
-\dontrun{
+ pkg <- setup_and_get_dummy_srcpkg()
 # load and attach a package
-pkg_load('mypkg')
+pkg_load(pkg)
 
 # just load, do not attach it (~ loadNamespace())
-pkg_load('mypkg', attach = FALSE)
+pkg_unload(pkg)
+pkg_load(pkg, attach = FALSE)
 
-# do some changed, to a source package or any of its depencies or dependents
-plan <- pkg_load('mypkg', dry_run = TRUE)
+# do some changes, to a source package or any of its depencies or dependents
+pkg_unload(pkg)
+plan <- pkg_load(pkg, dry_run = TRUE)
 # then you can inspect the plan actions
-
-
-}
 }

@@ -12,6 +12,16 @@ test_that("srcpkg", {
   # with a path
   srcpkg2 <- srcpkg(path = srcpkg$path)
   expect_identical(srcpkg2, srcpkg)
+
+  ### with dependencies
+  pkg <- pkg_create('.', 'withdeps', imports = c("i1", "i2"), depends = "d1", suggests = c("s1", "s2"))
+
+  srcpkg <- srcpkg(pkg)
+
+  .comma <- function(x) paste0(x, collapse = ",")
+  expect_identical(srcpkg$imports, .comma(c("i1", "i2")))
+  expect_identical(srcpkg$depends, .comma("d1"))
+  expect_identical(srcpkg$suggests, .comma(c("s1", "s2")))
 })
 
 
@@ -67,19 +77,6 @@ test_that("as_pkg_name", {
 })
 
 
-test_that("get_srcpkg_dependencies", {
-  setup_temp_dir()
-  
-  ### pkg with all types of deps
-  pkg <- pkg_create('.', 'AA', imports = c('i1', 'i2'), depends = 'd1', suggests = c('s1', 's2'))
-  deps <- get_srcpkg_dependencies(pkg)
-  expect_identical(deps, list(imports = c("i1", "i2"), depends = "d1", suggests = c("s1", "s2")))
-
-  ### package with no deps
-  pkg <- pkg_create('.', 'nodeps')
-  deps <- get_srcpkg_dependencies(pkg)
-  expect_identical(deps, list(imports = NULL, depends = NULL, suggests = NULL))
-})
 
 
 

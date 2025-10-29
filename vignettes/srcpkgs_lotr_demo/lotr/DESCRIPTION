@@ -2,10 +2,12 @@ Package: lotr
 Title: Lotr dummy master package for scrpkgs
 Description: Lotr dummy master package for scrpkgs.
 Version: 0.1
-Authors@R: person("Karl", "Forner", , "karl.forner@gmail.com", role = c("aut", "cre"))
-Imports: elves,gimli,aragorn,gandalf 
+Authors@R: person("Karl", "Forner", , "karl.forner@gmail.com", role =
+        c("aut", "cre"))
+Imports: elves,gimli,aragorn,gandalf
 Depends: hobbits
 License: MIT
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
+Suggests: testthat

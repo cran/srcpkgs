@@ -1,3 +1,4 @@
+.srcpkgs <- 
 test_that("srcpkgs", {
   setup_temp_dir()
 
@@ -37,7 +38,37 @@ test_that("srcpkgs", {
   expect_error(srcpkgs(list(list(1))), 'package')
 })
 
+.as_srcpkgs <- 
+test_that("as_srcpkgs", {
+  src_pkgs <- examples_srcpkgs_basic()
 
+  ### srcpkgs
+  res <- as_srcpkgs(src_pkgs, src_pkgs)
+  expect_identical(res, src_pkgs)
+
+  x <- subset_s3_list(src_pkgs, 2)
+  expect_identical(as_srcpkgs(x, src_pkgs), x)
+  
+  ### srcpkg
+  x <- src_pkgs[[2]]
+  expect_identical(as_srcpkgs(x, src_pkgs), srcpkgs(list(x)))
+  
+  ### names
+  res <- as_srcpkgs(c("BB", "AA"), src_pkgs)
+  expect_identical(res, subset_s3_list(src_pkgs, c("BB", "AA")))
+  
+  ### paths
+  res <- as_srcpkgs(src_pkgs$BB$path)
+  expect_identical(res, subset_s3_list(src_pkgs, "BB"))
+
+  ### edge cases
+  expect_error(as_srcpkgs(NULL), "bad input")
+  expect_error(as_srcpkgs(1), "bad arg")
+  expect_error(as_srcpkgs("/toto"), "not a directory")
+})
+
+
+.as.data.frame.srcpkgs <- 
 test_that("as.data.frame.srcpkgs", {
   setup_temp_dir()
   pkg1 <- pkg_create('.', 'pkg1', imports = c('i1', 'i2'), depends = c('d1', 'd2'))
@@ -57,9 +88,13 @@ test_that("as.data.frame.srcpkgs", {
   # --> better not to compare the path, just the basename
   expect_setequal(basename(df$path), c("pkg1", "pkg2"))
   expect_true(all(c('imports', 'depends', 'suggests') %in% names(df)))
+
+  expect_identical(df$imports, c("i1,i2", "i1"))
+  expect_identical(df$depends, c("d1,d2", ""))
+  expect_identical(df$suggests, c("", "s1,s2"))
 })
 
-
+.print.srcpkgs <- 
 test_that("print.srcpkgs", {
   setup_temp_dir()
   pkg1 <- pkg_create('.', 'pkg1')
@@ -73,13 +108,10 @@ test_that("print.srcpkgs", {
   expect_match(out[2], "pkg1")
 })
 
-
+.graph_from_srcpkgs <- 
 test_that("graph_from_srcpkgs", {
-  setup_temp_dir()
-
   src_pkgs <- examples_srcpkgs_complex_deps()
   nb <- length(src_pkgs)
-  on.exit(cleanup_dangling_srcpkgs(), add = TRUE)
 
   ### default: imports + depends
   mat <- graph_from_srcpkgs(src_pkgs)

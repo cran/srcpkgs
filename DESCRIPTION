@@ -1,6 +1,6 @@
 Package: srcpkgs
 Title: R Source Packages Manager
-Version: 0.1
+Version: 0.2
 Authors@R: 
     person("Karl", "Forner", , "karl.forner@gmail.com", role = c("aut", "cre", "cph"))
 Description: Manage a collection/library of R source packages. Discover, document, load, test 
@@ -8,16 +8,16 @@ Description: Manage a collection/library of R source packages. Discover, documen
   only what is needed on source code change. Run tests and checks in parallel.
 License: GPL (>= 3)
 Encoding: UTF-8
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 URL: https://github.com/kforner/srcpkgs
 BugReports: https://github.com/kforner/srcpkgs/issues
-Imports: cli, devtools, pkgload
-Suggests: knitr, rmarkdown, testthat (>= 3.0.0), withr
+Imports: cli, clitable, devtools, pkgload, testthat, stats, utils
+Suggests: knitr, rmarkdown, withr
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2024-05-14 17:51:19 UTC; karl
+Packaged: 2025-10-29 17:36:16 UTC; vscode
 Author: Karl Forner [aut, cre, cph]
 Maintainer: Karl Forner <karl.forner@gmail.com>
 Repository: CRAN
-Date/Publication: 2024-05-15 19:50:02 UTC
+Date/Publication: 2025-10-29 18:00:02 UTC

@@ -49,9 +49,10 @@ inhibit_r_loaders_hack <- function() {
 #'
 #' @return no return value, called for side-effects
 #' @export
+#' @importFrom utils   getFromNamespace
 #' @seealso [unhack_r_loaders()]
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # hack library
 #' hack_r_loaders()
 #' 
@@ -77,9 +78,14 @@ hack_r_loaders <- function() {
 #' @return no return value, called for side-effects
 #' @export
 #' @seealso [hack_r_loaders()]
+#' @examples
+#' \dontrun{
+#' unhack_r_loaders()
+#' }
 unhack_r_loaders <- function() {
   suppressMessages(untrace(library))
   suppressMessages(untrace(loadNamespace))
+  set_loaders_hack(FALSE)
 }
 
 

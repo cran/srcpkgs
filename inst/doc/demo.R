@@ -13,10 +13,14 @@ suppressPackageStartupMessages(library(devtools))
 pkgs <- c('bilbo', 'frodo', 'hobbits', 'legolas', 'galadriel', 'elves', 'gimli', 'aragorn', 'gandalf', 'lotr')
 
 ## ----devtools_load, error = TRUE----------------------------------------------
+try({
 load_all('lotr')
+})
 
 ## ----devtools_load2, error = TRUE---------------------------------------------
+try({
 load_all('hobbits')
+})
 
 ## ----devtools_load3, message = FALSE------------------------------------------
 document('frodo')
@@ -67,21 +71,27 @@ load_all('hobbits')
 names(lotr()$hobbits)
 
 ## ----devtools_edit6, error = TRUE---------------------------------------------
+try({
 unloadNamespace('hobbits')
+})
 
 ## ----devtools_edit7-----------------------------------------------------------
 devtools::unload('hobbits')
 
 ## ----devtools_edit8, error = TRUE---------------------------------------------
+try({
 lotr()
+})
 
 ## ----devtools_edit9, error = TRUE---------------------------------------------
+try({
 load_all('hobbits')
 names(lotr())
+})
 
 ## ----srcpkgs_setup------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 library(srcpkgs)
-options(width = 200)
+old <- options(width = 200)
 print(get_srcpkgs())
 
 ## ----srcpkgs_unload1----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -111,4 +121,7 @@ print(plan)
 
 ## ----srcpkgs_edit3------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 lotr()$hobbits$frodo$weapons
+
+## ----cleanup, include = FALSE-------------------------------------------------
+options(old)
 

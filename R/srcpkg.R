@@ -8,20 +8,17 @@ srcpkg <- function(pkg = devtools::as.package(path), path = NULL) {
   if (inherits(pkg, 'srcpkg')) return(pkg) 
   stop_unless(devtools::is.package(pkg), 'pkg is not a devtools package object')
 
+  # fix deps: either NULL, or with EOL and spaces/tabs
+  for (dep in c('imports', 'depends', 'suggests')) {
+    pkg[[dep]] <- gsub("\\s*\\s*", "", pkg[[dep]]  %||% '')  
+  }
+
+
   class(pkg) <- c("srcpkg", "package")
 
   pkg
 }
 
-get_srcpkg_dependencies <- function(src_pkg) {
-  .parse_deps_field <- function(type) {
-    str <- gsub('\n', '', src_pkg[[type]])
-    if (length(str) == 0 || !nzchar(str)) return(NULL)
-    strsplit(str, ',')[[1]]
-  }
-
-  sapply(c('imports', 'depends', 'suggests'), .parse_deps_field, simplify = FALSE)
-}
 
 
 # makes sure we get a srcpkg instance

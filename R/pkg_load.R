@@ -27,19 +27,18 @@
 #' @return the load plan as a data frame, or NULL if there is nothing to do.
 #' @export
 #' @examples
-#' \dontrun{
+#'  pkg <- setup_and_get_dummy_srcpkg()
 #' # load and attach a package
-#' pkg_load('mypkg')
+#' pkg_load(pkg)
 #' 
 #' # just load, do not attach it (~ loadNamespace())
-#' pkg_load('mypkg', attach = FALSE)
+#' pkg_unload(pkg)
+#' pkg_load(pkg, attach = FALSE)
 #' 
-#' # do some changed, to a source package or any of its depencies or dependents
-#' plan <- pkg_load('mypkg', dry_run = TRUE)
+#' # do some changes, to a source package or any of its depencies or dependents
+#' pkg_unload(pkg)
+#' plan <- pkg_load(pkg, dry_run = TRUE)
 #' # then you can inspect the plan actions
-#' 
-#' 
-#' }
 pkg_load <- function(pkgid,
   src_pkgs = get_srcpkgs(),
   attach = TRUE,
@@ -67,6 +66,12 @@ pkg_load <- function(pkgid,
      if (length(plan)) 
      execute_plan(plan, src_pkgs, quiet = quiet, helpers = helpers, export_all = export_all)
   }
+
+
+  ### currently the plan does not include an "attach" action. So in the case where the package
+  ### is already loaded and up to date, we still need to attach it
+  if (attach && !pkg_is_attached(pkg_name))
+    attachNamespace(pkg_name)
 
   invisible(plan)
 }
@@ -141,7 +146,7 @@ load_plan <- function(pkg_names, mat) {
 
 # return TRUE iff the package should be updated: roxigenised, (re)loaded
 pkg_is_outdated <- function(pkg_path, roxygen = TRUE, quiet = FALSE) {
-  (roxygen && pkg_has_no_doc(pkg_path)) || pkg_has_changed(pkg_path, quiet)
+  (roxygen && pkg_has_no_doc(pkg_path)) || pkg_has_changed(pkg_path, quiet = quiet)
 }
 
 # N.B: should only be called if the package is not loaded or has changed
