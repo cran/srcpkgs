@@ -6,11 +6,12 @@ dir.create(root_dir)
 file.copy('srcpkgs_lotr_demo', root_dir, recursive = TRUE)
 workdir <- file.path(root_dir, 'srcpkgs_lotr_demo')
 knitr::opts_knit$set(root.dir = workdir) # set directory for other chunks
-
+withr::local_envvar(R_USER_CACHE_DIR = tempfile())
 
 ## ----srcpkgs_setup, results = "markup"----------------------------------------
 
 library(srcpkgs)
+reset(root_dir)
 print(names(get_srcpkgs()))
 # cat(clitable::cli_table(as.data.frame(get_srcpkgs())), sep = "\n")
 

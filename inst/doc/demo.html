@@ -424,6 +424,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>and finally we can load it</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="kw">document</span>(<span class="st">&#39;lotr&#39;</span>)</span></code></pre></div>
 <pre><code>## ℹ Updating lotr documentation
+## ℹ Setting RoxygenNote to &quot;7.3.3&quot;
 ## ℹ Loading lotr</code></pre>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="kw">load_all</span>(<span class="st">&#39;lotr&#39;</span>)</span></code></pre></div>
 <pre><code>## ℹ Loading lotr</code></pre>
@@ -499,12 +500,14 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <pre><code>## [1] &quot;frodo&quot;</code></pre>
 <p>–&gt; now it works. Note that this is because <code>load_all()</code> is now able to force the unload of a package even though it is needed by another package:</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true"></a><span class="kw">unloadNamespace</span>(<span class="st">&#39;hobbits&#39;</span>)</span></code></pre></div>
-<pre><code>## Error: package &#39;hobbits&#39; is required by &#39;lotr&#39; so will not be detached</code></pre>
+<pre><code>## Error:
+## ! package &#39;hobbits&#39; is required by &#39;lotr&#39; so will not be detached</code></pre>
 <p>But:</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true"></a>devtools<span class="op">::</span><span class="kw">unload</span>(<span class="st">&#39;hobbits&#39;</span>)</span></code></pre></div>
 <p>Note that now <code>lotr</code> is <strong>broken</strong>:</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true"></a><span class="kw">lotr</span>()</span></code></pre></div>
-<pre><code>## Error in hobbits(): could not find function &quot;hobbits&quot;</code></pre>
+<pre><code>## Error in `hobbits()`:
+## ! could not find function &quot;hobbits&quot;</code></pre>
 <p>Let’s fix it</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true"></a><span class="kw">load_all</span>(<span class="st">&#39;hobbits&#39;</span>)</span></code></pre></div>
 <pre><code>## ℹ Loading hobbits</code></pre>
@@ -518,18 +521,18 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <pre><code>## hacked R loaders (cf srcpkgs::hack_r_loaders()).</code></pre>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true"></a>old &lt;-<span class="st"> </span><span class="kw">options</span>(<span class="dt">width =</span> <span class="dv">200</span>)</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">get_srcpkgs</span>())</span></code></pre></div>
-<pre><code>##             package version                                                         path                     imports depends suggests
-## aragorn     aragorn     0.1   /tmp/RtmpFmkvCZ/file307653aaabc0/srcpkgs_lotr_demo/aragorn                                     testthat
-## bilbo         bilbo     0.1     /tmp/RtmpFmkvCZ/file307653aaabc0/srcpkgs_lotr_demo/bilbo                                     testthat
-## elrond       elrond     0.1    /tmp/RtmpFmkvCZ/file307653aaabc0/srcpkgs_lotr_demo/elrond                                     testthat
-## elves         elves     0.1     /tmp/RtmpFmkvCZ/file307653aaabc0/srcpkgs_lotr_demo/elves           galadriel,legolas         testthat
-## frodo         frodo     0.1     /tmp/RtmpFmkvCZ/file307653aaabc0/srcpkgs_lotr_demo/frodo                                     testthat
-## galadriel galadriel     0.1 /tmp/RtmpFmkvCZ/file307653aaabc0/srcpkgs_lotr_demo/galadriel                                     testthat
-## gandalf     gandalf     0.1   /tmp/RtmpFmkvCZ/file307653aaabc0/srcpkgs_lotr_demo/gandalf                                     testthat
-## gimli         gimli     0.1     /tmp/RtmpFmkvCZ/file307653aaabc0/srcpkgs_lotr_demo/gimli                                     testthat
-## hobbits     hobbits     0.1   /tmp/RtmpFmkvCZ/file307653aaabc0/srcpkgs_lotr_demo/hobbits                       frodo   bilbo testthat
-## legolas     legolas     0.1   /tmp/RtmpFmkvCZ/file307653aaabc0/srcpkgs_lotr_demo/legolas                                     testthat
-## lotr           lotr     0.1      /tmp/RtmpFmkvCZ/file307653aaabc0/srcpkgs_lotr_demo/lotr elves,gimli,aragorn,gandalf hobbits testthat</code></pre>
+<pre><code>##             package version                                                          path                     imports depends suggests
+## aragorn     aragorn     0.1   /tmp/RtmpSzaWuZ/file1f78d130e20bb/srcpkgs_lotr_demo/aragorn                                     testthat
+## bilbo         bilbo     0.1     /tmp/RtmpSzaWuZ/file1f78d130e20bb/srcpkgs_lotr_demo/bilbo                                     testthat
+## elrond       elrond     0.1    /tmp/RtmpSzaWuZ/file1f78d130e20bb/srcpkgs_lotr_demo/elrond                                     testthat
+## elves         elves     0.1     /tmp/RtmpSzaWuZ/file1f78d130e20bb/srcpkgs_lotr_demo/elves           galadriel,legolas         testthat
+## frodo         frodo     0.1     /tmp/RtmpSzaWuZ/file1f78d130e20bb/srcpkgs_lotr_demo/frodo                                     testthat
+## galadriel galadriel     0.1 /tmp/RtmpSzaWuZ/file1f78d130e20bb/srcpkgs_lotr_demo/galadriel                                     testthat
+## gandalf     gandalf     0.1   /tmp/RtmpSzaWuZ/file1f78d130e20bb/srcpkgs_lotr_demo/gandalf                                     testthat
+## gimli         gimli     0.1     /tmp/RtmpSzaWuZ/file1f78d130e20bb/srcpkgs_lotr_demo/gimli                                     testthat
+## hobbits     hobbits     0.1   /tmp/RtmpSzaWuZ/file1f78d130e20bb/srcpkgs_lotr_demo/hobbits                       frodo   bilbo testthat
+## legolas     legolas     0.1   /tmp/RtmpSzaWuZ/file1f78d130e20bb/srcpkgs_lotr_demo/legolas                                     testthat
+## lotr           lotr     0.1      /tmp/RtmpSzaWuZ/file1f78d130e20bb/srcpkgs_lotr_demo/lotr elves,gimli,aragorn,gandalf hobbits testthat</code></pre>
 <div id="unloading" class="section level3">
 <h3>unloading</h3>
 <p>the <code>srcpkgs::pkg_unload()</code> takes into account the dependencies between the source packages.</p>
@@ -556,54 +559,84 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <h3>loading</h3>
 <p><code>srcpkgs::pkg_load()</code> takes care of everything: it roxygenizes the packages if needed, and load them in the appropriate order:</p>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true"></a>plan &lt;-<span class="st"> </span><span class="kw">pkg_load</span>(<span class="st">&#39;lotr&#39;</span>)</span></code></pre></div>
+<pre><code>## package &#39;/tmp/RtmpSzaWuZ/file1f78d130e20bb/srcpkgs_lotr_demo/legolas&#39; has changed: &#39;DESCRIPTION&#39; was &quot;modified&quot;</code></pre>
+<pre><code>## package &#39;/tmp/RtmpSzaWuZ/file1f78d130e20bb/srcpkgs_lotr_demo/galadriel&#39; has changed: &#39;DESCRIPTION&#39; was &quot;modified&quot;</code></pre>
+<pre><code>## package &#39;/tmp/RtmpSzaWuZ/file1f78d130e20bb/srcpkgs_lotr_demo/frodo&#39; has changed: &#39;DESCRIPTION&#39; was &quot;modified&quot;</code></pre>
+<pre><code>## package &#39;/tmp/RtmpSzaWuZ/file1f78d130e20bb/srcpkgs_lotr_demo/bilbo&#39; has changed: &#39;DESCRIPTION&#39; was &quot;modified&quot;</code></pre>
+<pre><code>## package &#39;/tmp/RtmpSzaWuZ/file1f78d130e20bb/srcpkgs_lotr_demo/hobbits&#39; has changed: &#39;DESCRIPTION&#39; was &quot;modified&quot;</code></pre>
+<pre><code>## package &#39;/tmp/RtmpSzaWuZ/file1f78d130e20bb/srcpkgs_lotr_demo/gimli&#39; has changed: &#39;DESCRIPTION&#39; was &quot;modified&quot;</code></pre>
+<pre><code>## package &#39;/tmp/RtmpSzaWuZ/file1f78d130e20bb/srcpkgs_lotr_demo/gandalf&#39; has changed: &#39;DESCRIPTION&#39; was &quot;modified&quot;</code></pre>
+<pre><code>## package &#39;/tmp/RtmpSzaWuZ/file1f78d130e20bb/srcpkgs_lotr_demo/elves&#39; has changed: &#39;DESCRIPTION&#39; was &quot;modified&quot;</code></pre>
+<pre><code>## package &#39;/tmp/RtmpSzaWuZ/file1f78d130e20bb/srcpkgs_lotr_demo/aragorn&#39; has changed: &#39;DESCRIPTION&#39; was &quot;modified&quot;</code></pre>
+<pre><code>## package &#39;/tmp/RtmpSzaWuZ/file1f78d130e20bb/srcpkgs_lotr_demo/lotr&#39; has changed: &#39;DESCRIPTION&#39; was &quot;modified&quot;</code></pre>
 <pre><code>## executing load on aragorn</code></pre>
-<pre><code>## ℹ Loading aragorn
+<pre><code>## ℹ Updating aragorn documentation
+## ℹ Loading aragorn
+## ℹ Loading aragorn
 ## executing load on bilbo
 ## 
+## ℹ Updating bilbo documentation
+## ℹ Loading bilbo
 ## ℹ Loading bilbo
 ## executing load on frodo
 ## 
+## ℹ Updating frodo documentation
+## ℹ Loading frodo
 ## ℹ Loading frodo
 ## executing load on galadriel
 ## 
+## ℹ Updating galadriel documentation
+## ℹ Loading galadriel
 ## ℹ Loading galadriel
 ## executing load on gandalf
 ## 
+## ℹ Updating gandalf documentation
+## ℹ Loading gandalf
 ## ℹ Loading gandalf
 ## executing load on gimli
 ## 
+## ℹ Updating gimli documentation
+## ℹ Loading gimli
 ## ℹ Loading gimli
 ## executing load on legolas
 ## 
+## ℹ Updating legolas documentation
+## ℹ Loading legolas
 ## ℹ Loading legolas
 ## executing load on elves
 ## 
+## ℹ Updating elves documentation
+## ℹ Loading elves
 ## ℹ Loading elves
 ## executing load on hobbits
 ## 
+## ℹ Updating hobbits documentation
+## ℹ Loading hobbits
 ## ℹ Loading hobbits
 ## executing load on lotr
 ## 
+## ℹ Updating lotr documentation
+## ℹ Loading lotr
 ## ℹ Loading lotr</code></pre>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true"></a><span class="kw">print</span>(plan)</span></code></pre></div>
-<pre><code>##      package action params
-## 1    aragorn   load   NULL
-## 2      bilbo   load   TRUE
-## 3      frodo   load   NULL
-## 4  galadriel   load   NULL
-## 5    gandalf   load   NULL
-## 6      gimli   load   NULL
-## 7    legolas   load   NULL
-## 8      elves   load   NULL
-## 9    hobbits   load   TRUE
-## 10      lotr   load   TRUE</code></pre>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">names</span>(<span class="kw">lotr</span>()))</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true"></a><span class="kw">print</span>(plan)</span></code></pre></div>
+<pre><code>##      package action     params
+## 1    aragorn   load       TRUE
+## 2      bilbo   load TRUE, TRUE
+## 3      frodo   load       TRUE
+## 4  galadriel   load       TRUE
+## 5    gandalf   load       TRUE
+## 6      gimli   load       TRUE
+## 7    legolas   load       TRUE
+## 8      elves   load       TRUE
+## 9    hobbits   load TRUE, TRUE
+## 10      lotr   load TRUE, TRUE</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">names</span>(<span class="kw">lotr</span>()))</span></code></pre></div>
 <pre><code>## [1] &quot;hobbits&quot; &quot;elves&quot;   &quot;dwarves&quot; &quot;humans&quot;  &quot;ainur&quot;</code></pre>
 </div>
 <div id="editing-and-reloading-1" class="section level3">
 <h3>editing and reloading</h3>
 <p>Let’s edit the <code>frodo</code> package, and change the weapon from <code>sting</code> to <code>sword</code>:</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true"></a><span class="kw">lotr</span>()<span class="op">$</span>hobbits<span class="op">$</span>frodo</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true"></a><span class="kw">lotr</span>()<span class="op">$</span>hobbits<span class="op">$</span>frodo</span></code></pre></div>
 <pre><code>## $first
 ## [1] &quot;Frodo&quot;
 ## 
@@ -615,8 +648,8 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 ## 
 ## $race
 ## [1] &quot;hobbit&quot;</code></pre>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true"></a>lines &lt;-<span class="st"> </span><span class="kw">readLines</span>(<span class="st">&#39;frodo/R/main.R&#39;</span>)</span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true"></a><span class="kw">cat</span>(lines, <span class="dt">sep =</span> <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true"></a>lines &lt;-<span class="st"> </span><span class="kw">readLines</span>(<span class="st">&#39;frodo/R/main.R&#39;</span>)</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true"></a><span class="kw">cat</span>(lines, <span class="dt">sep =</span> <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)</span></code></pre></div>
 <pre><code>## #&#39; provides frodo
 ## #&#39; @return as a list
 ## #&#39; @export
@@ -628,11 +661,11 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 ##     race = &#39;hobbit&#39;
 ##   )
 ## }</code></pre>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true"></a>edited_lines &lt;-<span class="st"> </span><span class="kw">sub</span>(<span class="st">&#39;sting&#39;</span>, <span class="st">&#39;sword&#39;</span>, lines)</span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true"></a><span class="kw">writeLines</span>(edited_lines, <span class="st">&#39;frodo/R/main.R&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true"></a>edited_lines &lt;-<span class="st"> </span><span class="kw">sub</span>(<span class="st">&#39;sting&#39;</span>, <span class="st">&#39;sword&#39;</span>, lines)</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true"></a><span class="kw">writeLines</span>(edited_lines, <span class="st">&#39;frodo/R/main.R&#39;</span>)</span></code></pre></div>
 <p>Now let’s ask <code>srcpkgs</code> to make sure the <code>lotr</code> package is up-to-date:</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true"></a>plan &lt;-<span class="st"> </span><span class="kw">pkg_load</span>(<span class="st">&#39;lotr&#39;</span>)</span></code></pre></div>
-<pre><code>## package &#39;/tmp/RtmpFmkvCZ/file307653aaabc0/srcpkgs_lotr_demo/frodo&#39; has changed: &#39;R/main.R&#39; was &quot;modified&quot;</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true"></a>plan &lt;-<span class="st"> </span><span class="kw">pkg_load</span>(<span class="st">&#39;lotr&#39;</span>)</span></code></pre></div>
+<pre><code>## package &#39;/tmp/RtmpSzaWuZ/file1f78d130e20bb/srcpkgs_lotr_demo/frodo&#39; has changed: &#39;R/main.R&#39; was &quot;modified&quot;</code></pre>
 <pre><code>## executing unload on lotr</code></pre>
 <pre><code>## executing unload on hobbits</code></pre>
 <pre><code>## executing unload on frodo</code></pre>
@@ -646,7 +679,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 ## executing load on lotr
 ## 
 ## ℹ Loading lotr</code></pre>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true"></a><span class="kw">print</span>(plan)</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true"></a><span class="kw">print</span>(plan)</span></code></pre></div>
 <pre><code>##   package action params
 ## 1    lotr unload   NULL
 ## 2 hobbits unload   NULL
@@ -655,7 +688,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 ## 5 hobbits   load   TRUE
 ## 6    lotr   load   TRUE</code></pre>
 <p>–&gt; It figured out that <code>frodo</code> was modified, and needed to be reloaded, and for that all its dependents needed to be also properly unloaded and re-loaded.</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true"></a><span class="kw">lotr</span>()<span class="op">$</span>hobbits<span class="op">$</span>frodo<span class="op">$</span>weapons</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true"></a><span class="kw">lotr</span>()<span class="op">$</span>hobbits<span class="op">$</span>frodo<span class="op">$</span>weapons</span></code></pre></div>
 <pre><code>## [1] &quot;sword&quot;        &quot;barrow-blade&quot;</code></pre>
 </div>
 </div>

@@ -360,7 +360,8 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <div id="listing-the-lotr-collection-of-packages-with-srcpkgs" class="section level2">
 <h2>listing the LOTR collection of packages with srcpkgs</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">library</span>(srcpkgs)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">names</span>(<span class="kw">get_srcpkgs</span>()))</span></code></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">reset</span>(root_dir)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">names</span>(<span class="kw">get_srcpkgs</span>()))</span></code></pre></div>
 <pre><code>##  [1] &quot;aragorn&quot;   &quot;bilbo&quot;     &quot;elrond&quot;    &quot;elves&quot;     &quot;frodo&quot;     &quot;galadriel&quot;
 ##  [7] &quot;gandalf&quot;   &quot;gimli&quot;     &quot;hobbits&quot;   &quot;legolas&quot;   &quot;lotr&quot;</code></pre>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="co"># cat(clitable::cli_table(as.data.frame(get_srcpkgs())), sep = &quot;\n&quot;)</span></span></code></pre></div>
@@ -468,24 +469,24 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <pre><code>## ╒═════════╤══╤══════╤══════╤═══════╤═════╤═══════╤═════╕
 ## │ package │nb│failed│passed│skipped│error│warning│ time│
 ## ╞═════════╪══╪══════╪══════╪═══════╪═════╪═══════╪═════╡
-## │ aragorn │ 2│ 0    │ 1    │ 1     │ 0   │ 0     │ 0.02│
-## │ bilbo   │17│ 6    │ 7    │ 2     │ 2   │ 2     │0.243│
+## │ aragorn │ 2│ 0    │ 1    │ 1     │ 0   │ 0     │0.022│
+## │ bilbo   │17│ 6    │ 7    │ 2     │ 2   │ 2     │0.225│
 ## │ elrond  │ 2│ 0    │ 1    │ 1     │ 0   │ 0     │0.007│
 ## │ elves   │ 2│ 0    │ 1    │ 1     │ 0   │ 0     │0.007│
-## │ frodo   │ 5│ 2    │ 2    │ 1     │ 0   │ 0     │ 0.04│
-## │galadriel│ 2│ 0    │ 1    │ 1     │ 0   │ 0     │0.007│
-## │ gandalf │ 5│ 2    │ 1    │ 1     │ 0   │ 1     │ 0.04│
-## │ gimli   │ 5│ 2    │ 2    │ 1     │ 0   │ 0     │0.041│
-## │ hobbits │ 3│ 0    │ 2    │ 1     │ 1   │ 0     │0.019│
-## │ legolas │ 2│ 0    │ 1    │ 1     │ 0   │ 0     │0.007│
-## │ lotr    │ 5│ 2    │ 2    │ 1     │ 0   │ 0     │0.041│
+## │ frodo   │ 5│ 2    │ 2    │ 1     │ 0   │ 0     │0.039│
+## │galadriel│ 2│ 0    │ 1    │ 1     │ 0   │ 0     │0.006│
+## │ gandalf │ 5│ 2    │ 1    │ 1     │ 0   │ 1     │0.043│
+## │ gimli   │ 5│ 2    │ 2    │ 1     │ 0   │ 0     │ 0.04│
+## │ hobbits │ 3│ 0    │ 2    │ 1     │ 1   │ 0     │0.018│
+## │ legolas │ 2│ 0    │ 1    │ 1     │ 0   │ 0     │0.006│
+## │ lotr    │ 5│ 2    │ 2    │ 1     │ 0   │ 0     │0.036│
 ## ╘═════════╧══╧══════╧══════╧═══════╧═════╧═══════╧═════╛</code></pre>
 <pre><code>## </code></pre>
 <pre><code>## ── Test results overview ───────────────────────────────────────────────────────</code></pre>
 <pre><code>## ╒═══════╤══╤══════╤══════╤═══════╤═════╤═══════╤═════╕
 ## │package│nb│failed│passed│skipped│error│warning│ time│
 ## ╞═══════╪══╪══════╪══════╪═══════╪═════╪═══════╪═════╡
-## │ 11    │50│ 14   │ 21   │ 12    │ 3   │ 3     │0.472│
+## │ 11    │50│ 14   │ 21   │ 12    │ 3   │ 3     │0.449│
 ## ╘═══════╧══╧══════╧══════╧═══════╧═════╧═══════╧═════╛
 ## 
 ## FAILED</code></pre>
@@ -503,20 +504,20 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>These S3 methods are also implemented for <code>pkg_test</code> objects.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">as.data.frame</span>(test_results))</span></code></pre></div>
 <pre><code>##             package nb failed passed skipped error warning  time
-## aragorn     aragorn  2      0      1       1     0       0 0.020
-## bilbo         bilbo 17      6      7       2     2       2 0.243
+## aragorn     aragorn  2      0      1       1     0       0 0.022
+## bilbo         bilbo 17      6      7       2     2       2 0.225
 ## elrond       elrond  2      0      1       1     0       0 0.007
 ## elves         elves  2      0      1       1     0       0 0.007
-## frodo         frodo  5      2      2       1     0       0 0.040
-## galadriel galadriel  2      0      1       1     0       0 0.007
-## gandalf     gandalf  5      2      1       1     0       1 0.040
-## gimli         gimli  5      2      2       1     0       0 0.041
-## hobbits     hobbits  3      0      2       1     1       0 0.019
-## legolas     legolas  2      0      1       1     0       0 0.007
-## lotr           lotr  5      2      2       1     0       0 0.041</code></pre>
+## frodo         frodo  5      2      2       1     0       0 0.039
+## galadriel galadriel  2      0      1       1     0       0 0.006
+## gandalf     gandalf  5      2      1       1     0       1 0.043
+## gimli         gimli  5      2      2       1     0       0 0.040
+## hobbits     hobbits  3      0      2       1     1       0 0.018
+## legolas     legolas  2      0      1       1     0       0 0.006
+## lotr           lotr  5      2      2       1     0       0 0.036</code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">summary</span>(test_results))</span></code></pre></div>
 <pre><code>##   package nb failed passed skipped error warning  time
-## 1      11 50     14     21      12     3       3 0.472</code></pre>
+## 1      11 50     14     21      12     3       3 0.449</code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">as.logical</span>(test_results))</span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true"></a><span class="kw">print</span>(test_results<span class="op">$</span>bilbo)</span></code></pre></div>
@@ -525,47 +526,47 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <pre><code>## ╒═══════╤═══════╤══╤══════╤══════╤═══════╤═════╤═══════╤═════╕
 ## │ file  │ test  │nb│failed│passed│skipped│error│warning│ time│
 ## ╞═══════╪═══════╪══╪══════╪══════╪═══════╪═════╪═══════╪═════╡
-## │ errors│ errors│ 1│ 0    │ 1    │ FALSE │ TRUE│ 0     │0.012│
-## │failure│failure│ 1│ 1    │ 0    │ FALSE │FALSE│ 0     │0.077│
-## │ misc  │ misc1 │ 2│ 1    │ 1    │ FALSE │FALSE│ 0     │0.036│
-## │ misc  │ misc2 │ 2│ 1    │ 0    │ TRUE  │FALSE│ 0     │0.014│
+## │ errors│ errors│ 1│ 0    │ 1    │ FALSE │ TRUE│ 0     │0.015│
+## │failure│failure│ 1│ 1    │ 0    │ FALSE │FALSE│ 0     │0.076│
+## │ misc  │ misc1 │ 2│ 1    │ 1    │ FALSE │FALSE│ 0     │0.024│
+## │ misc  │ misc2 │ 2│ 1    │ 0    │ TRUE  │FALSE│ 0     │0.015│
 ## │ misc  │ misc3 │ 2│ 0    │ 2    │ FALSE │FALSE│ 0     │0.005│
 ## │ misc  │ misc4 │ 2│ 0    │ 1    │ FALSE │ TRUE│ 1     │0.028│
-## │ mixed │ mixed │ 2│ 1    │ 1    │ FALSE │FALSE│ 0     │0.016│
-## │ skip  │ skip  │ 1│ 0    │ 0    │ TRUE  │FALSE│ 0     │0.002│
+## │ mixed │ mixed │ 2│ 1    │ 1    │ FALSE │FALSE│ 0     │0.017│
+## │ skip  │ skip  │ 1│ 0    │ 0    │ TRUE  │FALSE│ 0     │0.003│
 ## │success│success│ 1│ 0    │ 1    │ FALSE │FALSE│ 0     │0.004│
-## │warning│warning│ 3│ 2    │ 0    │ FALSE │FALSE│ 1     │0.049│
+## │warning│warning│ 3│ 2    │ 0    │ FALSE │FALSE│ 1     │0.038│
 ## ╘═══════╧═══════╧══╧══════╧══════╧═══════╧═════╧═══════╧═════╛</code></pre>
 <pre><code>## </code></pre>
 <pre><code>## ── Test results by file for package bilbo ──────────────────────────────────────</code></pre>
 <pre><code>## ╒═══════╤══╤══════╤══════╤═══════╤═════╤═══════╤═════╕
 ## │ file  │nb│failed│passed│skipped│error│warning│ time│
 ## ╞═══════╪══╪══════╪══════╪═══════╪═════╪═══════╪═════╡
-## │ errors│ 1│ 0    │ 1    │ 0     │ 1   │ 0     │0.012│
-## │failure│ 1│ 1    │ 0    │ 0     │ 0   │ 0     │0.077│
-## │ misc  │ 8│ 2    │ 4    │ 1     │ 1   │ 1     │0.083│
-## │ mixed │ 2│ 1    │ 1    │ 0     │ 0   │ 0     │0.016│
-## │ skip  │ 1│ 0    │ 0    │ 1     │ 0   │ 0     │0.002│
+## │ errors│ 1│ 0    │ 1    │ 0     │ 1   │ 0     │0.015│
+## │failure│ 1│ 1    │ 0    │ 0     │ 0   │ 0     │0.076│
+## │ misc  │ 8│ 2    │ 4    │ 1     │ 1   │ 1     │0.072│
+## │ mixed │ 2│ 1    │ 1    │ 0     │ 0   │ 0     │0.017│
+## │ skip  │ 1│ 0    │ 0    │ 1     │ 0   │ 0     │0.003│
 ## │success│ 1│ 0    │ 1    │ 0     │ 0   │ 0     │0.004│
-## │warning│ 3│ 2    │ 0    │ 0     │ 0   │ 1     │0.049│
+## │warning│ 3│ 2    │ 0    │ 0     │ 0   │ 1     │0.038│
 ## ╘═══════╧══╧══════╧══════╧═══════╧═════╧═══════╧═════╛</code></pre>
 <pre><code>## </code></pre>
 <pre><code>## ── Test results overview for package bilbo ─────────────────────────────────────</code></pre>
 <pre><code>## ╒══╤══════╤══════╤═══════╤═════╤═══════╤═════════════════╕
 ## │nb│failed│passed│skipped│error│warning│ time            │
 ## ╞══╪══════╪══════╪═══════╪═════╪═══════╪═════════════════╡
-## │17│ 6    │ 7    │ 2     │ 2   │ 2     │0.243000000000001│
+## │17│ 6    │ 7    │ 2     │ 2   │ 2     │0.224999999999996│
 ## ╘══╧══════╧══════╧═══════╧═════╧═══════╧═════════════════╛</code></pre>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">as.data.frame</span>(test_results<span class="op">$</span>lotr))</span></code></pre></div>
 <pre><code>##      file    test nb failed passed skipped error warning  time
-## 1 failure failure  1      1      0   FALSE FALSE       0 0.018
-## 2   mixed   mixed  2      1      1   FALSE FALSE       0 0.017
+## 1 failure failure  1      1      0   FALSE FALSE       0 0.014
+## 2   mixed   mixed  2      1      1   FALSE FALSE       0 0.016
 ## 3    skip    skip  1      0      0    TRUE FALSE       0 0.002
 ## 4 success success  1      0      1   FALSE FALSE       0 0.004</code></pre>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">summary</span>(test_results<span class="op">$</span>lotr))</span></code></pre></div>
 <pre><code>##      file nb failed passed skipped error warning  time
-## 1 failure  1      1      0       0     0       0 0.018
-## 2   mixed  2      1      1       0     0       0 0.017
+## 1 failure  1      1      0       0     0       0 0.014
+## 2   mixed  2      1      1       0     0       0 0.016
 ## 3    skip  1      0      0       1     0       0 0.002
 ## 4 success  1      0      1       0     0       0 0.004</code></pre>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">as.logical</span>(test_results<span class="op">$</span>aragorn))</span></code></pre></div>
@@ -599,16 +600,16 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <pre><code>## ╒═════════╤══════╤════════╤═════╤════╕
 ## │ package │errors│warnings│notes│time│
 ## ╞═════════╪══════╪════════╪═════╪════╡
-## │ elves   │ 0    │ 0      │ 2   │7.26│
-## │galadriel│ 0    │ 0      │ 2   │ 7  │
-## │ legolas │ 0    │ 0      │ 2   │6.95│
+## │ elves   │ 0    │ 0      │ 2   │7.27│
+## │galadriel│ 0    │ 0      │ 2   │6.99│
+## │ legolas │ 0    │ 0      │ 2   │ 7  │
 ## ╘═════════╧══════╧════════╧═════╧════╛</code></pre>
 <pre><code>## 
 ## ── Check results overview ──────────────────────────────────────────────────────</code></pre>
 <pre><code>## ╒═══════╤══════╤════════╤═════╤════╕
 ## │package│errors│warnings│notes│time│
 ## ╞═══════╪══════╪════════╪═════╪════╡
-## │ 3     │ 0    │ 0      │ 6   │21.2│
+## │ 3     │ 0    │ 0      │ 6   │21.3│
 ## ╘═══════╧══════╧════════╧═════╧════╛
 ## 
 ## SUCCESS</code></pre>
@@ -625,12 +626,12 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 </ul>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">as.data.frame</span>(check_results))</span></code></pre></div>
 <pre><code>##             package errors warnings notes     time
-## elves         elves      0        0     2 7.258815
-## galadriel galadriel      0        0     2 6.998296
-## legolas     legolas      0        0     2 6.954053</code></pre>
+## elves         elves      0        0     2 7.268668
+## galadriel galadriel      0        0     2 6.985442
+## legolas     legolas      0        0     2 7.003587</code></pre>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">summary</span>(check_results))</span></code></pre></div>
-<pre><code>##   package errors warnings notes     time
-## 1       3      0        0     6 21.21116</code></pre>
+<pre><code>##   package errors warnings notes    time
+## 1       3      0        0     6 21.2577</code></pre>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">as.logical</span>(check_results))</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true"></a><span class="kw">print</span>(check_results<span class="op">$</span>bilbo)</span></code></pre></div>
